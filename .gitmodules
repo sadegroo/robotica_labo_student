@@ -1,0 +1,9 @@
+[submodule "rtb"]
+	path = rtb
+	url = https://github.com/petercorke/robotics-toolbox-matlab
+[submodule "smtb"]
+	path = smtb
+	url = https://github.com/petercorke/spatial-math
+[submodule "common"]
+	path = common
+	url = https://github.com/petercorke/toolbox-common-matlab
