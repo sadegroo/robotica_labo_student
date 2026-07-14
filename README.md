@@ -19,7 +19,7 @@ MATLAB-project voor de labozittingen robotica. Open het project via
 
    (Al gekloond zonder submodules? Voer dan `git submodule update --init` uit.)
 
-2. Begin met **`Oefeningen/Getting_started.mlx`** — dit live script loodst je
+2. Begin met **`Voorbeelden/Getting_started.mlx`** — dit live script loodst je
    door de basis.
 
 3. In **`Voorbeelden/`** vind je uitgewerkte voorbeelden (o.a.
