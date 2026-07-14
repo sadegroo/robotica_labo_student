@@ -5,7 +5,13 @@ MATLAB-project voor de labozittingen robotica. Open het project via
 
 ## Aan de slag
 
-1. Kloon de repository **inclusief submodules**:
+1. Kloon de repository met **GitHub Desktop**:
+   - Installeer [GitHub Desktop](https://desktop.github.com/).
+   - Klik op deze GitHub-pagina op de groene knop **Code** en kies
+     **Open with GitHub Desktop**, en bevestig de kloonlocatie.
+   - GitHub Desktop haalt de submodules automatisch mee binnen.
+
+   *Alternatief via de command line* (inclusief submodules):
 
    ```
    git clone --recurse-submodules https://github.com/sadegroo/robotica_labo_student.git
