@@ -72,7 +72,7 @@ hulpfuncties voor dit labo (o.a. `mat2latex`, `plotFrame`). Overzicht van
 | `T = fk_classicalDH(DH_table, theta)` | voorwaartse kinematica uit DH-tabel |
 | `[Jv, Jw] = geometric_jacobian(DH_table, joint_types, frame_idx)` | geometrische Jacobiaan |
 | `[linvel, angvel, Jv, Jw, symbols] = prop_vel_jac(DH_table, joint_types, ...)` | snelheidspropagatie |
-| `D = displace(v)`, `Tinv = inv4(T)` | translatiematrix; snelle inverse van T |
+| `D = translate(v)`, `Tinv = inv4(T)` | translatiematrix; snelle inverse van T |
 
 **`invkin/` — inverse kinematica**
 
