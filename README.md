@@ -48,16 +48,38 @@ kun je ook `help <functienaam>` gebruiken (bv. `help RotInv`).
 ## Eigen hulpfuncties
 
 De overige functies in `MATLAB_Functions/` en `Extra_functions/` zijn eigen
-hulpfuncties voor dit labo (o.a. `mat2latex`, `plotFrame`, `nearestSO3`,
-`nearestSE3`). `Extra_functions/` is verder onderverdeeld in:
+hulpfuncties voor dit labo (o.a. `mat2latex`, `plotFrame`). Overzicht van
+`Extra_functions/` (details: `help <functienaam>`):
 
-- **`fwdkin/`** — voorwaartse kinematica: elementaire rotatiematrices
-  (`RotMatXaxis`, `RotMatYaxis`, `RotMatZaxis`, `RotMatKaxis`),
-  `Euler2RotMat` (rotatiematrix uit Euler- of fixed-angle-hoeken, alle 24
-  conventies, ook symbolisch), DH-transformaties (`DH`, `DH_full`,
-  `fk_classicalDH`) en Jacobianen (`geometric_jacobian`, `prop_vel_jac`).
-- **`invkin/`** — inverse kinematica: `RotMat2Euler` (hoeken uit een
-  rotatiematrix, inverse van `Euler2RotMat`), `RotMat2AxisAngle` en
-  `pieperIK_classicalDH`.
-- **`tests/`** — unittests voor de eigen functies; uitvoeren kan met
-  `runtests('Extra_functions/tests')`.
+**Algemeen**
+
+| Interface | Doel |
+|---|---|
+| `[R, d] = nearestSO3(M)` | dichtstbijzijnde rotatiematrix + afstand |
+| `[T, d] = nearestSE3(Ttilde)` | dichtstbijzijnde homogene transformatie + afstand |
+| `e = manipulabilityEllipsoid(J, part)` | ellipsoïdedata (assen, stralen, w, conditie) uit een 6xn (`part` = `'linear'`/`'angular'`), 3xn of 2xn Jacobiaan |
+| `h = plotEllipsoid(e, center, ...)` | tekent die ellipsoïde (3D-oppervlak of 2D-ellips) op positie `center` |
+
+**`fwdkin/` — voorwaartse kinematica**
+
+| Interface | Doel |
+|---|---|
+| `Rx = RotMatXaxis(angle, outputsize)` | elementaire rotatie om x (idem `RotMatYaxis`, `RotMatZaxis`) |
+| `R = RotMatKaxis(k, theta)` | rotatie om willekeurige as k |
+| `R = Euler2RotMat(angles, convention)` | rotatiematrix uit Euler-/fixed-angles (24 conventies, ook symbolisch) |
+| `T = DH(alpha, a, d, theta)` | één klassieke DH-transformatie |
+| `[Tfull, Tparts, Tcumul] = DH_full(DH_table)` | volledige keten, klassieke DH (idem `DH_modified`) |
+| `T = fk_classicalDH(DH_table, theta)` | voorwaartse kinematica uit DH-tabel |
+| `[Jv, Jw] = geometric_jacobian(DH_table, joint_types, frame_idx)` | geometrische Jacobiaan |
+| `[linvel, angvel, Jv, Jw, symbols] = prop_vel_jac(DH_table, joint_types, ...)` | snelheidspropagatie |
+| `D = displace(v)`, `Tinv = inv4(T)` | translatiematrix; snelle inverse van T |
+
+**`invkin/` — inverse kinematica**
+
+| Interface | Doel |
+|---|---|
+| `[sol1, sol2] = RotMat2Euler(R, convention)` | Euler-hoeken uit R (inverse van `Euler2RotMat`) |
+| `[K1, th1, K2, th2] = RotMat2AxisAngle(R)` | as-hoekvoorstelling uit R |
+| `solutions = pieperIK_classicalDH(DH_table, T_desired)` | Pieper-IK, klassieke DH (idem `pieperIK_modifiedDH`) |
+
+**`tests/`** — unittests; uitvoeren met `runtests('Extra_functions/tests')`.

@@ -129,6 +129,27 @@ function testKnownDiagonalCase(testCase)
     verifyEqual(testCase, abs(e.axes), eye(3), 'AbsTol', 1e-12);
 end
 
+function testMinSVAndConditionNumberFields(testCase)
+    % sqrt_minSV is the smallest semi-axis and sqrt_cd the ratio of
+    % longest to shortest, for 6xn, 3xn and planar 2xn input.
+    for J = {randn(6, 4), randn(3, 4), randn(2, 3)}
+        e = manipulabilityEllipsoid(J{1});
+        verifyEqual(testCase, e.sqrt_minSV, min(e.radii), 'AbsTol', 1e-12);
+        verifyEqual(testCase, e.sqrt_cd, max(e.radii) / min(e.radii), ...
+            'AbsTol', 1e-10);
+    end
+end
+
+function testConditionNumberNaNWhenSingular(testCase)
+    % A singular Jacobian has sqrt_minSV = 0 and sqrt_cd = NaN.
+    eRank1 = manipulabilityEllipsoid([1 2; 2 4]);
+    verifyEqual(testCase, eRank1.sqrt_minSV, 0);
+    verifyTrue(testCase, isnan(eRank1.sqrt_cd));
+    eZero = manipulabilityEllipsoid(zeros(3, 4));
+    verifyEqual(testCase, eZero.sqrt_minSV, 0);
+    verifyTrue(testCase, isnan(eZero.sqrt_cd));
+end
+
 function testInvalidPartErrors(testCase)
     verifyError(testCase, @() manipulabilityEllipsoid(randn(6, 3), 'lineair'), ...
         ?MException);

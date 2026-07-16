@@ -21,6 +21,9 @@ function ellipsoid = manipulabilityEllipsoid(J, part)
 %     radii - semi-axis lengths, sqrt of the eigenvalues of A
 %     A     - symmetric matrix Jp*Jp'
 %     w     - manipulability measure prod(radii) = sqrt(det(A))
+%     sqrt_minSV - smallest semi-axis (smallest singular value of Jp)
+%     sqrt_cd    - sqrt of the condition number of A, i.e. the ratio
+%                  longest/shortest semi-axis; NaN when singular
 
     if nargin < 2
         part = 'linear';
@@ -54,4 +57,11 @@ function ellipsoid = manipulabilityEllipsoid(J, part)
     ellipsoid.radii = sqrt(lambda);
     ellipsoid.A = A;
     ellipsoid.w = prod(ellipsoid.radii);
+    sqrt_lambdamin = sqrt(min(lambda));
+    ellipsoid.sqrt_minSV = sqrt_lambdamin;
+    if sqrt_lambdamin==0
+        ellipsoid.sqrt_cd = NaN;
+    else
+        ellipsoid.sqrt_cd = sqrt(max(lambda)/min(lambda));
+    end
 end
