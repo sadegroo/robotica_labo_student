@@ -59,6 +59,7 @@ hulpfuncties voor dit labo (o.a. `mat2latex`, `plotFrame`). Overzicht van
 | `[T, d] = nearestSE3(Ttilde)` | dichtstbijzijnde homogene transformatie + afstand |
 | `e = manipulabilityEllipsoid(J, part)` | ellipsoïdedata (assen, stralen, w, conditie) uit een 6xn (`part` = `'linear'`/`'angular'`), 3xn of 2xn Jacobiaan |
 | `h = plotEllipsoid(e, center, ...)` | tekent die ellipsoïde (3D-oppervlak of 2D-ellips) op positie `center` |
+| `[e, fig] = ellips2R(theta, L)` | plot een planaire 2R arm (2 lijnsegmenten) met de manipuleerbaarheidsellips op de eindeffector en geeft de manipuleerbaarheidsmaten terug |
 
 **`fwdkin/` — voorwaartse kinematica**
 
